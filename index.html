@@ -1,0 +1,918 @@
+<title>수학 답안지</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Song+Myung&family=IBM+Plex+Sans+KR:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
+
+  :root {
+    --bg: #eef1f6;
+    --grid-line: rgba(28,35,51,0.055);
+    --surface: #ffffff;
+    --surface-alt: #f6f8fb;
+    --ink: #1c2333;
+    --ink-soft: #4b5468;
+    --muted: #7a8296;
+    --border: #d8dce6;
+    --accent: #c63c2f;
+    --accent-solid: #c63c2f;
+    --accent-soft: #f4dcd8;
+    --accent-ink: #7a241a;
+    --blue: #2f5d8a;
+    --blue-soft: #e1eaf3;
+    --success: #2f7a53;
+    --success-soft: #deeee4;
+    --ad-border: #b9c0cf;
+    --ad-text: #8891a4;
+    --shadow: 0 1px 2px rgba(28,35,51,0.04), 0 8px 24px -12px rgba(28,35,51,0.18);
+    --font-display: 'Song Myung', 'Noto Serif KR', serif;
+    --font-body: 'IBM Plex Sans KR', 'Pretendard', -apple-system, sans-serif;
+    --font-mono: 'IBM Plex Mono', 'IBM Plex Sans KR', monospace;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #10141c;
+      --grid-line: rgba(255,255,255,0.05);
+      --surface: #171d28;
+      --surface-alt: #1d2430;
+      --ink: #edeff3;
+      --ink-soft: #b7becc;
+      --muted: #7e8698;
+      --border: #2b3342;
+      --accent: #e76a55;
+      --accent-solid: #bf4a35;
+      --accent-soft: #3a211d;
+      --accent-ink: #f3b7aa;
+      --blue: #7db1e0;
+      --blue-soft: #1e2c3a;
+      --success: #6fbe93;
+      --success-soft: #1b2e23;
+      --ad-border: #3a4254;
+      --ad-text: #6b7285;
+      --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 8px 24px -12px rgba(0,0,0,0.5);
+    }
+  }
+
+  :root[data-theme="dark"] {
+    --bg: #10141c;
+    --grid-line: rgba(255,255,255,0.05);
+    --surface: #171d28;
+    --surface-alt: #1d2430;
+    --ink: #edeff3;
+    --ink-soft: #b7becc;
+    --muted: #7e8698;
+    --border: #2b3342;
+    --accent: #e76a55;
+    --accent-soft: #3a211d;
+    --accent-ink: #f3b7aa;
+    --blue: #7db1e0;
+    --blue-soft: #1e2c3a;
+    --success: #6fbe93;
+    --success-soft: #1b2e23;
+    --ad-border: #3a4254;
+    --ad-text: #6b7285;
+    --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 8px 24px -12px rgba(0,0,0,0.5);
+  }
+
+  * { box-sizing: border-box; }
+
+  html, body {
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+    background:
+      repeating-linear-gradient(0deg, var(--grid-line) 0 1px, transparent 1px 28px),
+      repeating-linear-gradient(90deg, var(--grid-line) 0 1px, transparent 1px 28px),
+      var(--bg);
+    color: var(--ink);
+    font-family: var(--font-body);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    min-height: 100vh;
+  }
+
+  a { color: var(--blue); }
+
+  .wrap {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 0 20px 80px;
+  }
+
+  /* ---------- header ---------- */
+
+  header.site {
+    padding: 28px 0 20px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 16px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 28px;
+  }
+
+  .brand h1 {
+    font-family: var(--font-display);
+    font-size: clamp(1.5rem, 1.1rem + 1.6vw, 2.1rem);
+    margin: 0 0 4px;
+    letter-spacing: 0.01em;
+    text-wrap: balance;
+  }
+
+  .brand p {
+    margin: 0;
+    color: var(--muted);
+    font-size: 0.88rem;
+  }
+
+  .header-side {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-shrink: 0;
+  }
+
+  .streak-chip {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    padding: 7px 11px;
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+    font-weight: 500;
+    color: var(--ink-soft);
+    box-shadow: var(--shadow);
+    white-space: nowrap;
+  }
+
+  .streak-chip strong {
+    color: var(--accent);
+    font-size: 0.95rem;
+  }
+
+  .theme-toggle {
+    width: 34px;
+    height: 34px;
+    border-radius: 3px;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    color: var(--ink-soft);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    flex-shrink: 0;
+  }
+  .theme-toggle:hover { border-color: var(--muted); }
+  .theme-toggle svg { width: 16px; height: 16px; }
+
+  /* ---------- demo notice ---------- */
+
+  .notice {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    background: var(--blue-soft);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--blue);
+    border-radius: 2px;
+    padding: 12px 14px;
+    font-size: 0.83rem;
+    color: var(--ink-soft);
+    margin-bottom: 24px;
+  }
+  .notice b { color: var(--ink); }
+
+  /* ---------- ad slots ---------- */
+
+  .ad-slot {
+    border: 1px dashed var(--ad-border);
+    border-radius: 2px;
+    color: var(--ad-text);
+    font-size: 0.72rem;
+    letter-spacing: 0.04em;
+    text-align: center;
+    padding: 14px;
+    margin: 22px 0;
+    font-family: var(--font-mono);
+  }
+  .ad-slot.leaderboard { min-height: 64px; display:flex; align-items:center; justify-content:center; }
+  .ad-slot.in-article { min-height: 90px; display:flex; align-items:center; justify-content:center; }
+
+  /* ---------- section label ---------- */
+
+  .section-label {
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin: 0 0 10px;
+  }
+
+  /* ---------- problem card ---------- */
+
+  .problem-card {
+    position: relative;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    box-shadow: var(--shadow);
+    padding: 28px 26px 26px;
+    margin-bottom: 8px;
+  }
+
+  .stamp {
+    position: absolute;
+    top: -14px;
+    right: 22px;
+    background: var(--accent-solid);
+    color: #fff;
+    font-family: var(--font-mono);
+    font-weight: 600;
+    font-size: 0.78rem;
+    padding: 6px 12px;
+    border-radius: 2px;
+    transform: rotate(3deg);
+    box-shadow: 0 4px 10px -4px rgba(0,0,0,0.4);
+  }
+
+  .problem-meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 18px;
+  }
+
+  .tag {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    padding: 4px 9px;
+    border-radius: 2px;
+    border: 1px solid transparent;
+  }
+  .tag.subject { background: var(--blue-soft); color: var(--blue); border-color: color-mix(in srgb, var(--blue) 30%, transparent); }
+  .tag.type { background: var(--surface-alt); color: var(--ink-soft); border-color: var(--border); }
+
+  .difficulty {
+    display: inline-flex;
+    align-items: center;
+    gap: 3px;
+    margin-left: auto;
+  }
+  .difficulty svg { width: 13px; height: 13px; }
+  .difficulty .on { color: var(--accent); }
+  .difficulty .off { color: var(--border); }
+
+  .problem-date {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    color: var(--muted);
+    margin-bottom: 2px;
+  }
+
+  .problem-body {
+    font-size: 1.05rem;
+    line-height: 1.9;
+    color: var(--ink);
+  }
+
+  .problem-body .var { font-style: italic; font-family: var(--font-mono); }
+
+  .frac {
+    display: inline-flex;
+    flex-direction: column;
+    vertical-align: middle;
+    text-align: center;
+    margin: 0 3px;
+    font-family: var(--font-mono);
+    font-size: 0.92em;
+    line-height: 1.15;
+    position: relative;
+    top: 0.05em;
+  }
+  .frac .num { padding: 0 3px 2px; border-bottom: 1.4px solid currentColor; }
+  .frac .den { padding: 2px 3px 0; }
+
+  .choices {
+    list-style: none;
+    margin: 18px 0 0;
+    padding: 0;
+    display: grid;
+    gap: 8px;
+  }
+  .choices li {
+    display: flex;
+    gap: 10px;
+    align-items: baseline;
+    font-family: var(--font-mono);
+    font-size: 0.95rem;
+    color: var(--ink-soft);
+  }
+  .choices .num { color: var(--muted); }
+
+  .answer-form {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 20px;
+    flex-wrap: wrap;
+  }
+
+  .answer-form label {
+    font-size: 0.85rem;
+    color: var(--ink-soft);
+  }
+
+  .answer-form input[type="text"] {
+    font-family: var(--font-mono);
+    font-size: 1rem;
+    width: 100px;
+    padding: 8px 10px;
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    background: var(--surface-alt);
+    color: var(--ink);
+  }
+  .answer-form input[type="text"]:focus {
+    outline: 2px solid var(--blue);
+    outline-offset: 1px;
+  }
+
+  button {
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 0.86rem;
+    border-radius: 2px;
+    border: 1px solid transparent;
+    padding: 9px 16px;
+    cursor: pointer;
+  }
+  button:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
+
+  .btn-primary {
+    background: var(--accent-solid);
+    color: #fff;
+  }
+  .btn-primary:hover { filter: brightness(1.06); }
+
+  .btn-ghost {
+    background: transparent;
+    border-color: var(--border);
+    color: var(--ink-soft);
+  }
+  .btn-ghost:hover { border-color: var(--muted); }
+
+  .feedback {
+    font-size: 0.86rem;
+    font-weight: 600;
+    display: none;
+    align-items: center;
+    gap: 6px;
+  }
+  .feedback.show { display: inline-flex; }
+  .feedback.correct { color: var(--success); }
+  .feedback.wrong { color: var(--accent); }
+
+  /* ---------- solution ---------- */
+
+  .solution {
+    margin-top: 18px;
+    border-top: 1px dashed var(--border);
+    padding-top: 18px;
+    display: none;
+  }
+  .solution.show { display: block; }
+
+  .solution-answer {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 8px;
+    background: var(--success-soft);
+    color: var(--success);
+    font-family: var(--font-mono);
+    font-weight: 600;
+    padding: 7px 12px;
+    border-radius: 2px;
+    margin-bottom: 14px;
+    font-size: 0.92rem;
+  }
+
+  .steps {
+    margin: 0;
+    padding-left: 0;
+    list-style: none;
+    counter-reset: step;
+    display: grid;
+    gap: 12px;
+  }
+  .steps li {
+    counter-increment: step;
+    display: grid;
+    grid-template-columns: 22px 1fr;
+    gap: 10px;
+    font-size: 0.96rem;
+    color: var(--ink-soft);
+    line-height: 1.75;
+  }
+  .steps li::before {
+    content: counter(step);
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: var(--blue);
+    background: var(--blue-soft);
+    width: 22px;
+    height: 22px;
+    border-radius: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .steps li b { color: var(--ink); font-weight: 600; }
+
+  /* ---------- streak / archive ---------- */
+
+  .panel {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    box-shadow: var(--shadow);
+    padding: 22px 24px;
+    margin: 34px 0;
+  }
+
+  .streak-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-bottom: 16px;
+  }
+
+  .streak-row p {
+    margin: 0;
+    font-size: 0.9rem;
+    color: var(--ink-soft);
+  }
+  .streak-row p strong { color: var(--accent); font-family: var(--font-mono); }
+
+  .week-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 6px;
+  }
+  .week-grid .day {
+    aspect-ratio: 1;
+    border-radius: 2px;
+    border: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    color: var(--muted);
+  }
+  .week-grid .day.done {
+    background: var(--success-soft);
+    border-color: transparent;
+    color: var(--success);
+    font-weight: 600;
+  }
+  .week-grid .day.today {
+    border-color: var(--accent);
+    color: var(--accent);
+    font-weight: 600;
+  }
+
+  /* ---------- archive list ---------- */
+
+  .archive-grid {
+    display: grid;
+    gap: 10px;
+  }
+
+  .archive-item {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    gap: 14px;
+    padding: 12px 14px;
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    background: var(--surface-alt);
+    cursor: pointer;
+    text-align: left;
+    font-family: var(--font-body);
+    color: var(--ink);
+  }
+  .archive-item:hover { border-color: var(--blue); }
+  .archive-item[disabled] {
+    cursor: not-allowed;
+    color: var(--muted);
+    opacity: 0.6;
+  }
+  .archive-item .day-badge {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    font-weight: 600;
+    color: var(--muted);
+    width: 46px;
+  }
+  .archive-item .title { font-size: 0.9rem; }
+  .archive-item .title .sub { display:block; color: var(--muted); font-size: 0.78rem; margin-top: 2px; }
+  .archive-item .arrow { color: var(--muted); font-family: var(--font-mono); }
+
+  /* ---------- why section ---------- */
+
+  .why-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+    margin-top: 14px;
+  }
+  .why-grid .item {
+    padding: 16px;
+    background: var(--surface-alt);
+    border: 1px solid var(--border);
+    border-radius: 2px;
+  }
+  .why-grid .item h3 {
+    margin: 0 0 6px;
+    font-size: 0.92rem;
+    font-weight: 600;
+    color: var(--ink);
+  }
+  .why-grid .item p {
+    margin: 0;
+    font-size: 0.85rem;
+    color: var(--ink-soft);
+    line-height: 1.65;
+  }
+
+  footer.site {
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border);
+    font-size: 0.78rem;
+    color: var(--muted);
+    line-height: 1.8;
+  }
+
+  @media (max-width: 520px) {
+    .problem-card { padding: 22px 18px 20px; }
+    .stamp { right: 16px; }
+    .streak-row { flex-direction: column; align-items: flex-start; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { transition: none !important; animation: none !important; }
+  }
+</style>
+
+<div class="wrap">
+
+  <header class="site">
+    <div class="brand">
+      <h1>수학 답안지</h1>
+      <p>하루 한 번, 수학 기출 문제 풀기</p>
+    </div>
+    <div class="header-side">
+      <div class="streak-chip" aria-live="polite">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="width:14px;height:14px;color:var(--accent);"><path d="M9 11l3 3L22 4"></path><path d="M21 12v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h11"></path></svg>
+        <strong id="streakCount">0</strong>일째
+      </div>
+      <button class="theme-toggle" id="themeToggle" type="button" aria-label="테마 전환" title="라이트/다크 전환">
+        <svg id="themeIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"></path></svg>
+      </button>
+    </div>
+  </header>
+
+  <div class="notice">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="width:16px;height:16px;color:var(--blue);flex-shrink:0;margin-top:2px;"><circle cx="12" cy="12" r="9"></circle><path d="M12 8v5"></path><path d="M12 16.5h.01"></path></svg>
+    <span><b>디자인 데모</b>입니다. 모든 문제는 수능 출제 범위와 난이도를 참고해 직접 제작한 자체 문항이며, 실제 대학수학능력시험 기출문제가 아닙니다. 평가원 기출문제는 저작권 정책상 원문 그대로 게재하지 않습니다.</span>
+  </div>
+
+  <div class="ad-slot leaderboard">광고 영역 · 상단 배너 (예시, 728×90)</div>
+
+  <div class="section-label">오늘의 문제</div>
+
+  <div class="problem-card">
+    <div class="stamp" id="dayStamp">DAY 07</div>
+    <div class="problem-meta">
+      <span class="tag subject" id="subjectTag">수학Ⅰ · 수열</span>
+      <span class="tag type" id="typeTag">단답형</span>
+      <div class="difficulty" id="difficultyStars" aria-label="체감 난이도"></div>
+    </div>
+    <div class="problem-date" id="problemDate">2026년 8월 24일 · 자체 제작 문항</div>
+    <div class="problem-body" id="problemBody"></div>
+
+    <form class="answer-form" id="answerForm">
+      <label for="answerInput">답</label>
+      <input type="text" id="answerInput" inputmode="numeric" autocomplete="off" placeholder="정수 입력">
+      <button type="submit" class="btn-primary">채점하기</button>
+      <button type="button" class="btn-ghost" id="revealBtn">정답 및 풀이 보기</button>
+      <span class="feedback correct" id="feedbackCorrect">✓ 정답입니다</span>
+      <span class="feedback wrong" id="feedbackWrong">✗ 다시 확인해보세요</span>
+    </form>
+
+    <div class="ad-slot in-article">광고 영역 · 정답 확인 전 (예시, 인아티클)</div>
+
+    <div class="solution" id="solutionBox">
+      <div class="solution-answer" id="solutionAnswer"></div>
+      <ol class="steps" id="solutionSteps"></ol>
+    </div>
+  </div>
+
+  <div class="panel">
+    <div class="streak-row">
+      <p>이번 주 <strong id="weekSolvedCount">0</strong>일 풀이 완료 · 매일 접속하면 스트릭이 이어집니다</p>
+    </div>
+    <div class="week-grid" id="weekGrid"></div>
+  </div>
+
+  <div class="section-label">지난 문제 아카이브</div>
+  <div class="archive-grid" id="archiveGrid"></div>
+
+  <div class="section-label" style="margin-top:34px;">이 서비스가 다른 문제집 사이트와 다른 점</div>
+  <div class="why-grid">
+    <div class="item">
+      <h3>매일 한 문제, 습관으로</h3>
+      <p>한 번에 몰아서 푸는 문제은행이 아니라, 하루 한 문제로 꾸준히 재방문하도록 설계했습니다.</p>
+    </div>
+    <div class="item">
+      <h3>바로 채점, 그다음 풀이</h3>
+      <p>답을 먼저 입력해 보고, 정답 확인 버튼을 눌러야 풀이가 열립니다. 광고 노출 지점과도 자연스럽게 맞습니다.</p>
+    </div>
+    <div class="item">
+      <h3>스트릭 · 아카이브</h3>
+      <p>연속 풀이 기록과 지난 문제 아카이브로 재방문 이유를 만듭니다.</p>
+    </div>
+  </div>
+
+  <footer class="site">
+    <p>본 페이지는 "수학 답안지" 서비스 컨셉을 보여주기 위한 디자인 데모입니다. 표시된 모든 문제와 풀이는 수능 출제 경향을 참고하여 직접 제작한 자체 문항으로, 한국교육과정평가원의 실제 기출문제가 아닙니다. 평가원 기출문제는 저작권자의 명시적 허락 없이 무단으로 복제·배포·게재할 수 없어(한국교육과정평가원 저작권 안내 참조), 정식 서비스에서도 자체 제작 문항을 기본으로 운영할 계획입니다.</p>
+  </footer>
+
+</div>
+
+<script>
+(function () {
+  "use strict";
+
+  // ---------- theme toggle ----------
+  var root = document.documentElement;
+  var themeToggle = document.getElementById('themeToggle');
+  function applyStoredTheme() {
+    try {
+      var saved = localStorage.getItem('mhj-theme');
+      if (saved === 'light' || saved === 'dark') root.setAttribute('data-theme', saved);
+    } catch (e) {}
+  }
+  applyStoredTheme();
+  themeToggle.addEventListener('click', function () {
+    var current = root.getAttribute('data-theme');
+    var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+    var effectiveDark = current ? current === 'dark' : prefersDark;
+    var next = effectiveDark ? 'light' : 'dark';
+    root.setAttribute('data-theme', next);
+    try { localStorage.setItem('mhj-theme', next); } catch (e) {}
+  });
+
+  // ---------- problem data ----------
+  // NOTE: 모두 직접 제작한 자체 문항입니다 (실제 평가원 기출문제 아님). 정답은 별도로 코드로 검증했습니다.
+  var problems = [
+    {
+      day: 1,
+      date: "2026년 8월 18일",
+      subject: "수학Ⅰ · 지수와 로그",
+      type: "단답형",
+      difficulty: 1,
+      bodyHtml: "두 양수 <span class=\"var\">a</span>, <span class=\"var\">b</span>에 대하여 log₂<span class=\"var\">a</span> + log₂<span class=\"var\">b</span> = 6이고 log₂<span class=\"var\">a</span> − log₂<span class=\"var\">b</span> = 2일 때, <span class=\"var\">a</span>의 값을 구하시오.",
+      answer: "16",
+      answerLabel: "a = 16",
+      steps: [
+        "두 식을 더하면 <b>2log₂a = 8</b> 이므로 log₂a = 4",
+        "따라서 <b>a = 2⁴ = 16</b> 입니다."
+      ]
+    },
+    {
+      day: 2,
+      date: "2026년 8월 19일",
+      subject: "수학Ⅱ · 적분",
+      type: "단답형",
+      difficulty: 2,
+      bodyHtml: "곡선 <span class=\"var\">y = x² − 4x + 3</span>과 <span class=\"var\">x</span>축으로 둘러싸인 부분의 넓이의 6배의 값을 구하시오.",
+      answer: "8",
+      answerLabel: "6 × 넓이 = 8",
+      steps: [
+        "x² − 4x + 3 = (x − 1)(x − 3) 이므로 곡선은 x = 1, 3에서 x축과 만나고, 그 사이에서는 y &lt; 0 입니다.",
+        "넓이 = ∫₁³ { −(x² − 4x + 3) } dx = [ −x³/3 + 2x² − 3x ]₁³",
+        "x = 3 대입: 0, x = 1 대입: −4/3 이므로 넓이 = 0 − (−4/3) = <b>4/3</b>",
+        "따라서 넓이의 6배는 4/3 × 6 = <b>8</b> 입니다."
+      ]
+    },
+    {
+      day: 3,
+      date: "2026년 8월 20일",
+      subject: "미적분",
+      type: "단답형",
+      difficulty: 2,
+      bodyHtml: "함수 <span class=\"var\">f(x) = eˣ sin x</span>에 대하여 <span class=\"var\">f&prime;(0)</span>의 값을 구하시오.",
+      answer: "1",
+      answerLabel: "f′(0) = 1",
+      steps: [
+        "곱의 미분법에 의해 <b>f&prime;(x) = eˣ sin x + eˣ cos x = eˣ(sin x + cos x)</b>",
+        "x = 0을 대입하면 f&prime;(0) = e⁰(sin 0 + cos 0) = 1 × (0 + 1) = <b>1</b>"
+      ]
+    },
+    {
+      day: 4,
+      date: "2026년 8월 21일",
+      subject: "기하",
+      type: "단답형",
+      difficulty: 2,
+      bodyHtml: "좌표평면에서 두 점 <span class=\"var\">A(1, 2)</span>, <span class=\"var\">B(9, 10)</span>을 이은 선분 AB를 3:1로 내분하는 점의 좌표를 <span class=\"var\">(p, q)</span>라 할 때, <span class=\"var\">p + q</span>의 값을 구하시오.",
+      answer: "15",
+      answerLabel: "p + q = 15",
+      steps: [
+        "내분점 공식에 의해 <b>P = ( (1·1 + 3·9)/4 , (1·2 + 3·10)/4 )</b>",
+        "= (28/4, 32/4) = (7, 8) 이므로 p = 7, q = 8",
+        "따라서 <b>p + q = 15</b> 입니다."
+      ]
+    },
+    {
+      day: 5,
+      date: "2026년 8월 22일",
+      subject: "수학Ⅱ · 미분",
+      type: "단답형",
+      difficulty: 2,
+      bodyHtml: "함수 <span class=\"var\">f(x) = x³ − 3x² + a</span>가 열린구간 <span class=\"var\">(0, 3)</span>에서 극솟값 <span class=\"var\">−4</span>를 가질 때, 상수 <span class=\"var\">a</span>의 값을 구하시오.",
+      answer: "0",
+      answerLabel: "a = 0",
+      steps: [
+        "<b>f&prime;(x) = 3x² − 6x = 3x(x − 2)</b> 이므로 임계점은 x = 0, x = 2 입니다.",
+        "열린구간 (0, 3)의 내부점 중 임계점은 x = 2 뿐이고, f&Prime;(x) = 6x − 6 에서 f&Prime;(2) = 6 &gt; 0 이므로 x = 2에서 극솟값을 가집니다.",
+        "f(2) = 8 − 12 + a = a − 4 이고, 이 값이 −4 이어야 하므로 <b>a − 4 = −4</b>",
+        "따라서 <b>a = 0</b> 입니다."
+      ]
+    },
+    {
+      day: 6,
+      date: "2026년 8월 23일",
+      subject: "확률과 통계",
+      type: "단답형",
+      difficulty: 3,
+      bodyHtml: "주머니에 1부터 5까지의 자연수가 하나씩 적힌 공 5개가 들어 있다. 이 주머니에서 임의로 2개의 공을 동시에 꺼낼 때, 꺼낸 두 공에 적힌 수의 합이 짝수일 확률을 <span class=\"var\">p</span>/<span class=\"var\">q</span> (<span class=\"var\">p</span>, <span class=\"var\">q</span>는 서로소인 자연수) 라 하자. <span class=\"var\">p + q</span>의 값을 구하시오.",
+      answer: "7",
+      answerLabel: "p + q = 7",
+      steps: [
+        "5개 중 2개를 꺼내는 전체 경우의 수는 <b>₅C₂ = 10</b> 입니다.",
+        "두 수의 합이 짝수이려면 (홀,홀) 또는 (짝,짝) 이어야 합니다. 홀수 {1,3,5} 3개, 짝수 {2,4} 2개.",
+        "(홀,홀): ₃C₂ = 3가지, (짝,짝): ₂C₂ = 1가지 → 합 4가지",
+        "확률 = 4/10 = 2/5 이므로 p = 2, q = 5, <b>p + q = 7</b>"
+      ]
+    },
+    {
+      day: 7,
+      date: "2026년 8월 24일",
+      subject: "수학Ⅰ · 수열",
+      type: "단답형",
+      difficulty: 1,
+      bodyHtml: "첫째항이 3이고 공비가 2인 등비수열 <span class=\"var\">{aₙ}</span>이 있다. <span class=\"var\">bₙ = aₙ + aₙ₊₂</span> 라 할 때, <span class=\"var\">b₄</span>의 값을 구하시오.",
+      answer: "120",
+      answerLabel: "b₄ = 120",
+      steps: [
+        "일반항은 <b>aₙ = 3 · 2ⁿ⁻¹</b> 입니다.",
+        "a₄ = 3 · 2³ = 24, a₆ = 3 · 2⁵ = 96",
+        "b₄ = a₄ + a₆ = 24 + 96 = <b>120</b>"
+      ]
+    }
+  ];
+
+  var todayIndex = problems.length - 1; // DAY 07 = 오늘
+
+  function starsHtml(level) {
+    var total = 3, html = "";
+    for (var i = 1; i <= total; i++) {
+      var cls = i <= level ? "on" : "off";
+      html += '<svg class="' + cls + '" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2 L14.5 8.5 L21.5 9 L16 13.5 L17.8 20.5 L12 16.7 L6.2 20.5 L8 13.5 L2.5 9 L9.5 8.5 Z"/></svg>';
+    }
+    return html;
+  }
+
+  function renderProblem(p, opts) {
+    document.getElementById('dayStamp').textContent = 'DAY ' + String(p.day).padStart(2, '0');
+    document.getElementById('subjectTag').textContent = p.subject;
+    document.getElementById('typeTag').textContent = p.type;
+    document.getElementById('difficultyStars').innerHTML = starsHtml(p.difficulty);
+    document.getElementById('problemDate').textContent = p.date + ' · 자체 제작 문항';
+    document.getElementById('problemBody').innerHTML = p.bodyHtml;
+
+    document.getElementById('solutionBox').classList.remove('show');
+    document.getElementById('feedbackCorrect').classList.remove('show');
+    document.getElementById('feedbackWrong').classList.remove('show');
+    document.getElementById('answerInput').value = '';
+
+    document.getElementById('solutionAnswer').innerHTML = '정답 · ' + p.answerLabel;
+    var stepsEl = document.getElementById('solutionSteps');
+    stepsEl.innerHTML = '';
+    p.steps.forEach(function (s) {
+      var li = document.createElement('li');
+      li.innerHTML = s;
+      stepsEl.appendChild(li);
+    });
+
+    if (opts && opts.scroll) {
+      document.querySelector('.problem-card').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }
+
+  function checkAnswer(p) {
+    var input = document.getElementById('answerInput').value.trim();
+    var correct = document.getElementById('feedbackCorrect');
+    var wrong = document.getElementById('feedbackWrong');
+    correct.classList.remove('show');
+    wrong.classList.remove('show');
+    if (!input) return;
+    if (input === p.answer) {
+      correct.classList.add('show');
+      markSolvedToday();
+    } else {
+      wrong.classList.add('show');
+    }
+  }
+
+  document.getElementById('answerForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+    checkAnswer(problems[todayIndex]);
+  });
+
+  document.getElementById('revealBtn').addEventListener('click', function () {
+    var box = document.getElementById('solutionBox');
+    box.classList.toggle('show');
+    this.textContent = box.classList.contains('show') ? '풀이 접기' : '정답 및 풀이 보기';
+    if (box.classList.contains('show')) markSolvedToday();
+  });
+
+  // ---------- streak (demo: localStorage, per-viewer only) ----------
+  function todayKey() {
+    return 'mhj-solved-' + new Date().toISOString().slice(0, 10);
+  }
+  function markSolvedToday() {
+    try { localStorage.setItem(todayKey(), '1'); } catch (e) {}
+    renderStreak();
+  }
+  function renderStreak() {
+    var solvedToday = false;
+    try { solvedToday = localStorage.getItem(todayKey()) === '1'; } catch (e) {}
+
+    var labels = ['월', '화', '수', '목', '금', '토', '일'];
+    var todayIdx = (new Date().getDay() + 6) % 7; // 0=월 ... 6=일
+    var grid = document.getElementById('weekGrid');
+    grid.innerHTML = '';
+    var solvedCount = solvedToday ? 1 : 0;
+    for (var i = 0; i < 7; i++) {
+      var cell = document.createElement('div');
+      var isToday = i === todayIdx;
+      cell.className = 'day' + (isToday && solvedToday ? ' done' : '') + (isToday ? ' today' : '');
+      cell.textContent = labels[i];
+      grid.appendChild(cell);
+    }
+    document.getElementById('weekSolvedCount').textContent = solvedCount;
+    document.getElementById('streakCount').textContent = solvedToday ? 1 : 0;
+  }
+  renderStreak();
+
+  // ---------- archive ----------
+  var archiveGrid = document.getElementById('archiveGrid');
+  problems.slice().reverse().forEach(function (p) {
+    var btn = document.createElement('button');
+    btn.className = 'archive-item';
+    btn.type = 'button';
+    btn.innerHTML =
+      '<span class="day-badge">DAY ' + String(p.day).padStart(2, '0') + '</span>' +
+      '<span class="title">' + p.date + '<span class="sub">' + p.subject + ' · ' + p.type + '</span></span>' +
+      '<span class="arrow">풀어보기 →</span>';
+    btn.addEventListener('click', function () {
+      renderProblem(p, { scroll: true });
+    });
+    archiveGrid.appendChild(btn);
+  });
+  var lockedNote = document.createElement('div');
+  lockedNote.className = 'archive-item';
+  lockedNote.setAttribute('disabled', 'true');
+  lockedNote.innerHTML = '<span class="day-badge">DAY 08</span><span class="title">내일 공개 예정<span class="sub">매일 자정 새 문제가 열립니다</span></span><span class="arrow">준비중</span>';
+  archiveGrid.appendChild(lockedNote);
+
+  // ---------- init ----------
+  renderProblem(problems[todayIndex]);
+})();
+</script>
