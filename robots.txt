@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://0103iris.github.io/math-answer-sheet/sitemap.xml
